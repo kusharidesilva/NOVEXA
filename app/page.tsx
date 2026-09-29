@@ -1,0 +1,52 @@
+import Link from "next/link";
+import { ArrowDown, ArrowRight, ArrowUpRight, BadgeCheck, Blocks, Compass, MoveUpRight, Target, Workflow } from "lucide-react";
+import { Eyebrow, ArrowLink, SectionIntro } from "@/components/ui";
+import { Reveal } from "@/components/reveal";
+import { WorkGrid } from "@/components/work-grid";
+import { Testimonials } from "@/components/testimonials";
+import { Faq } from "@/components/faq";
+import { ContactForm } from "@/components/contact-form";
+import { services } from "@/data/services";
+import { process } from "@/data/content";
+
+const serviceIcons = [Target, Workflow, MoveUpRight, BadgeCheck, Blocks, Compass];
+const reasons = [
+  { title: "Strategy before noise", detail: "Every creative decision starts with a clear purpose." },
+  { title: "Creative + technology", detail: "We bring visual thinking and modern digital tools together." },
+  { title: "Built around your business", detail: "The work is shaped by your goals, audience, and context." },
+  { title: "Focused on growth", detail: "We care about work that looks good and does a job." }
+];
+
+export default function Home() {
+  return <main id="main">
+    <section className="hero" id="home"><div className="hero-glow hero-glow-one" /><div className="hero-glow hero-glow-two" /><div className="hero-grid" />
+      <div className="shell hero-inner"><div className="hero-copy"><Eyebrow>Creative digital agency</Eyebrow><h1><span>Create.</span><span>Connect.</span><span className="gradient-text">Grow.</span></h1><p>We build brands, experiences, and digital strategies that move businesses forward.</p><div className="hero-actions"><Link href="/contact" className="button button-primary">Start a project <ArrowUpRight size={18} /></Link><Link href="/#work" className="button button-outline">Explore our work <ArrowRight size={18} /></Link></div><div className="hero-proof"><span className="proof-line" />Branding <i /> Marketing <i /> Web <i /> Digital growth</div></div>
+        <div className="hero-art" aria-hidden="true"><div className="hero-art-ring ring-one" /><div className="hero-art-ring ring-two" /><div className="hero-orb"><div className="orb-shine" /></div><div className="hero-float-card float-card-top"><span className="float-card-icon">↗</span><small>Ideas built for</small><strong>what&apos;s next.</strong></div><div className="hero-float-card float-card-bottom"><span className="mini-bars"><i /><i /><i /><i /><i /></span><span><small>CREATE / CONNECT</small><strong>GROW</strong></span></div><span className="hero-art-label">THE NEXT STARTS HERE / NOVEXA</span></div></div>
+      <Link className="scroll-cue" href="#about" aria-label="Scroll to about NOVEXA"><ArrowDown size={16} /> Scroll to explore</Link>
+    </section>
+
+    <section className="trust-strip"><div className="shell trust-inner"><span>One creative partner for</span><div className="trust-marquee"><div className="trust-track">{["STRATEGY", "IDENTITY", "EXPERIENCE", "MARKETING", "CONTENT", "GROWTH", "STRATEGY", "IDENTITY", "EXPERIENCE", "MARKETING", "CONTENT", "GROWTH"].map((word, index) => <span key={`${word}-${index}`}>{word}<i /></span>)}</div></div></div></section>
+
+    <section className="section about-section" id="about"><div className="shell"><div className="about-grid"><Reveal><Eyebrow>Who we are</Eyebrow><h2 className="display-heading">Built for brands ready for <em>what&apos;s next.</em></h2></Reveal><Reveal className="about-side" delay={.1}><p>NOVEXA combines strategy, creativity, and technology to help businesses build meaningful digital experiences and sustainable growth.</p><div className="about-equation"><div><span>NOVA</span><small>New ideas. Fresh thinking. Creative energy.</small></div><b>+</b><div><span>NEXT</span><small>Forward thinking. Technology. Growth.</small></div></div><ArrowLink href="/about">More about NOVEXA</ArrowLink></Reveal></div><Reveal className="about-statement"><span>Our point of view</span><p>We help brands <strong>move forward.</strong></p><span className="statement-asterisk">✳</span></Reveal><div className="stats-placeholders" aria-label="Company statistics awaiting verification">{["Projects completed", "Happy clients", "Brands supported", "Client satisfaction"].map(label => <div key={label}><strong>—</strong><span>{label}</span></div>)}<small>Verified NOVEXA figures will be added here.</small></div></div></section>
+
+    <section className="section services-section" id="services"><div className="shell"><div className="section-heading-row"><SectionIntro eyebrow="What we do" title={<>Everything your brand needs to <em>grow digitally.</em></>} description="From the first idea to the next stage of growth, we connect the right disciplines around your goals." /><ArrowLink href="/services">All services</ArrowLink></div><div className="service-grid">{services.slice(0, 6).map((item, index) => { const Icon = serviceIcons[index]; return <Reveal key={item.number} className={`service-card ${"featured" in item && item.featured ? "service-featured" : ""}`} delay={index * .04}><div className="service-card-top"><span>{item.number} / 10</span><Icon size={25} strokeWidth={1.4} /></div><div><h3>{item.title}</h3><p>{item.summary}</p><Link href="/services" aria-label={`Learn more about ${item.title}`}><ArrowUpRight size={21} /></Link></div></Reveal>; })}</div><div className="service-bottom-note"><span>One team. Many ways forward.</span><ArrowLink href="/services">Explore all 10 services</ArrowLink></div></div></section>
+
+    <section className="section work-section" id="work"><div className="shell"><div className="section-heading-row"><SectionIntro eyebrow="Selected work" title={<>Ideas with a <em>purpose.</em></>} description="A preview of how strategy, design, and digital execution can work together. The projects below are clearly marked concepts until approved client work is added." /><ArrowLink href="/work">View all work</ArrowLink></div><div className="work-disclosure">Concept projects / sample portfolio content</div><WorkGrid compact /></div></section>
+
+    <section className="section why-section"><div className="shell why-layout"><div className="why-intro"><Eyebrow light>Why NOVEXA</Eyebrow><h2>Good work starts with <em>good thinking.</em></h2><p>A connected approach gives your brand a stronger foundation and a clearer way forward.</p></div><div className="reasons-list">{reasons.map((reason, index) => <Reveal className="reason-row" key={reason.title}><span>0{index + 1}</span><div><h3>{reason.title}</h3><p>{reason.detail}</p></div><ArrowUpRight size={20} /></Reveal>)}</div></div></section>
+
+    <section className="section process-section" id="process"><div className="shell"><SectionIntro eyebrow="How we work" title={<>From idea to <em>impact.</em></>} description="A clear process keeps the work focused, collaborative, and moving." /><div className="process-list">{process.map((step, index) => <Reveal className="process-item" key={step.number} delay={index * .06}><span className="process-number">{step.number}</span><div><h3>{step.title}</h3><p>{step.detail}</p></div><span className="process-indicator"><ArrowUpRight size={21} /></span></Reveal>)}</div></div></section>
+
+    <section className="section featured-section"><div className="shell featured-panel"><div className="featured-copy"><Eyebrow light>Featured concept</Eyebrow><h2>A clearer digital home for a growing business.</h2><p>A website concept that shows how careful structure, confident design, and a direct inquiry path can make an offering easier to understand.</p><span className="concept-note">Sample case study · No client or performance results represented</span><Link href="/work/digital-platform-concept" className="button button-white">Explore the concept <ArrowUpRight size={18} /></Link></div><div className="featured-browser" aria-hidden="true"><div className="featured-browser-top"><span /><span /><span /><i>digital.home</i></div><div className="featured-browser-body"><small>YOUR NEXT CHAPTER</small><b>Clarity creates<br /><em>momentum.</em></b><span>Explore the possibilities ↗</span><div className="featured-browser-blocks"><i /><i /><i /></div></div></div></div></section>
+
+    <section className="section testimonials-section" id="testimonials"><div className="shell testimonials-layout"><SectionIntro eyebrow="Client stories" title={<>The best work is built <em>together.</em></>} description="This space is ready for approved client feedback. The cards are examples of the format and are not real testimonials." /><Testimonials /></div></section>
+
+    <section className="brand-manifesto"><div className="shell"><div className="manifesto-row"><span>01</span><h2>CREATE.</h2><p>Powerful ideas and digital experiences.</p></div><div className="manifesto-row"><span>02</span><h2>CONNECT.</h2><p>Brands with the people who matter.</p></div><div className="manifesto-row"><span>03</span><h2>GROW.</h2><p>Businesses through smarter digital solutions.</p></div></div></section>
+
+    <section className="section faq-section"><div className="shell faq-layout"><div><Eyebrow>Good to know</Eyebrow><h2 className="display-heading">Questions, <em>answered.</em></h2><p>Have something else in mind? We would love to hear about it.</p><ArrowLink href="/contact">Get in touch</ArrowLink></div><Faq /></div></section>
+
+    <section className="section contact-section" id="contact"><div className="shell contact-layout"><div className="contact-copy"><Eyebrow light>Start a project</Eyebrow><h2>Have an idea?<br /><em>Let&apos;s build what&apos;s next.</em></h2><p>Tell us where you are today and where you want your business to go. We&apos;ll take it from there.</p><div className="contact-side-note"><span>Prefer another way to connect?</span><p>Email and social contact details will appear here once provided.</p></div></div><div className="contact-form-card"><h3>Tell us about your project</h3><p>Share a few details and we&apos;ll start a conversation.</p><ContactForm /></div></div></section>
+
+    <section className="final-cta"><div className="shell final-cta-inner"><span>YOUR NEXT STARTS HERE</span><h2>Ready for your<br />next move?</h2><p>Let&apos;s create something that connects, performs, and grows.</p><Link className="button button-white" href="/contact">Let&apos;s work together <ArrowUpRight size={18} /></Link><div className="cta-orbit" aria-hidden="true" /></div></section>
+  </main>;
+}
