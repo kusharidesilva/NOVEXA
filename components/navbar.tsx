@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -15,16 +14,15 @@ const links = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
   useEffect(() => {
     const update = () => setScrolled(window.scrollY > 20);
     update(); window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
   }, []);
   useEffect(() => { document.body.classList.toggle("menu-open", open); return () => document.body.classList.remove("menu-open"); }, [open]);
-  return <header className={`site-header ${pathname === "/contact" ? "is-contact" : ""} ${scrolled || open ? "is-scrolled" : ""}`}>
+  return <header className={`site-header ${scrolled || open ? "is-scrolled" : ""}`}>
     <div className="nav-inner shell">
-      <Logo />
+      <Logo priority />
       <nav className="desktop-nav" aria-label="Main navigation">{links.map(([label, href]) => <Link key={label} href={href}>{label}</Link>)}</nav>
       <Link className="nav-cta" href="/contact">Let&apos;s work together <ArrowUpRight size={16} /></Link>
       <button className="mobile-toggle" type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-navigation" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>

@@ -3,8 +3,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
 
-export function Logo({ light = false }: { light?: boolean }) {
-  return <Link href="/" className={`logo-link ${light ? "logo-light" : ""}`} aria-label="NOVEXA home"><span className="logo-window"><Image src="/logo.png" alt="NOVEXA — Create. Connect. Grow." width={150} height={100} priority className="logo-image" /></span></Link>;
+export function Logo({ light = false, priority = false }: { light?: boolean; priority?: boolean }) {
+  return <Link href="/" className={`logo-link ${light ? "logo-light" : ""}`} aria-label="NOVEXA home"><Image src="/logo-display.svg" alt="NOVEXA — Create. Connect. Grow." width={145} height={103} priority={priority} unoptimized className="logo-image" /></Link>;
 }
 
 export function Eyebrow({ children, light = false }: { children: ReactNode; light?: boolean }) {
