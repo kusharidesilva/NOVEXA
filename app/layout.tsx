@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   alternates: siteUrl ? { canonical: "/" } : undefined,
   openGraph: { title: "NOVEXA | Create. Connect. Grow.", description: "Creative thinking, connected experiences and digital growth.", type: "website", images: ["/logo.png"] },
   robots: { index: true, follow: true },
-  icons: { icon: "/logo-mark.svg" }
+  icons: { icon: [{ url: "/favicon.png", type: "image/png" }], apple: "/favicon.png" }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
